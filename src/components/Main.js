@@ -3,17 +3,17 @@ import React from 'react'
 export default function Main() {
 
   function handleEditAvatarClick() {
-    const avatarPopup = document.querySelector('#profilePicPopup');
+    const avatarPopup = document.querySelector('.popup_type_avatar');
     avatarPopup.classList.add('popup_active');
   }
 
   function handleEditProfileClick() {
-    const profilePopup = document.querySelector('#editProfile');
+    const profilePopup = document.querySelector('.popup_type_profile');
     profilePopup.classList.add('popup_active');
   }
 
   function handleAddPlaceClick() {
-    const placePopup = document.querySelector('#newPlace');
+    const placePopup = document.querySelector('.popup_type_place');
     placePopup.classList.add('popup_active');
   }
 

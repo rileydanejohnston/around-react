@@ -1,6 +1,7 @@
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import PopupWithForm from './PopupWithForm';
 
 function App() {
   return (
@@ -9,6 +10,23 @@ function App() {
         <Header />
         <Main />
         <Footer />
+        <PopupWithForm title='Are you sure?' name='confirm'/>
+        <PopupWithForm title='Change profile picture' name='avatar'>
+          <input className='popup__about popup__about_profile-pic popup__input' id='profile-pic-url' type='url' placeholder='Image link' name='pic' required />
+          <span className='popup__error' id='profile-pic-url-error'></span>
+        </PopupWithForm>
+        <PopupWithForm title='Edit profile' name='profile'>
+          <input className='popup__name popup__input' id='profile-name' type='text' placeholder='Name' name='name' minlength='2' maxlength='40' required />
+          <span className='popup__error' id='profile-name-error'></span>
+          <input className='popup__about popup__input' id='profile-about' type='text' placeholder='About' name='about' minlength='2' maxlength='200' required />
+          <span className='popup__error' id='profile-about-error'></span>
+        </PopupWithForm>
+        <PopupWithForm title='New place' name='place'>
+          <input className='popup__name popup__input' id='newPlace-name' type='text' placeholder='Title' name='title' minlength='1' maxlength='30' required />
+          <span className='popup__error' id='newPlace-name-error'></span>
+          <input className='popup__about popup__input' id='newPlace-about' type='url' placeholder='Image link' name='link' required />
+          <span className='popup__error' id='newPlace-about-error'></span>
+        </PopupWithForm>
         <div className='popup' id='confirmPopup'>
           <div className='popup__container'>
             <button className='popup__close' type='button'></button>
@@ -18,43 +36,7 @@ function App() {
             </form>
           </div>
         </div>
-        <div className='popup' id='profilePicPopup'>
-          <div className='popup__container'>
-            <button className='popup__close' type='button'></button>
-            <form className='popup__form' id='profile-pic' method='POST' name='form' novalidate>
-              <h3 className='popup__title popup__title_confirm'>Change profile picture</h3>
-              <input className='popup__about popup__about_profile-pic popup__input' id='profile-pic-url' type='url' placeholder='Image link' name='pic' required />
-              <span className='popup__error' id='profile-pic-url-error'></span>
-              <button className='popup__submit popup__submit_disabled popup__submit_profile-pic' id='profile-pic-submit' type='submit' name='submit' disabled>Save</button>
-            </form>
-          </div>
-        </div>
-        <div className='popup' id='editProfile'>
-          <div className='popup__container'>
-            <button className='popup__close' type='button'></button>
-            <form className='popup__form' id='profile-popup' method='POST' name='form' novalidate>
-              <h3 className='popup__title'>Edit profile</h3>
-              <input className='popup__name popup__input' id='profile-name' type='text' placeholder='Name' name='name' minlength='2' maxlength='40' required />
-              <span className='popup__error' id='profile-name-error'></span>
-              <input className='popup__about popup__input' id='profile-about' type='text' placeholder='About' name='about' minlength='2' maxlength='200' required />
-              <span className='popup__error' id='profile-about-error'></span>
-              <button className='popup__submit popup__submit_disabled' id='profile-submit' type='submit' name='submit' disabled>Save</button>
-            </form>
-          </div>
-        </div>
-        <div className='popup' id='newPlace'>
-          <div className='popup__container'>
-            <button className='popup__close popup__close_type_place' type='button'></button>
-            <form className='popup__form' id='place-popup' method='POST' name='form' novalidate>
-              <h3 className='popup__title'>New place</h3>
-              <input className='popup__name popup__input' id='newPlace-name' type='text' placeholder='Title' name='title' minlength='1' maxlength='30' required />
-              <span className='popup__error' id='newPlace-name-error'></span>
-              <input className='popup__about popup__input' id='newPlace-about' type='url' placeholder='Image link' name='link' required />
-              <span className='popup__error' id='newPlace-about-error'></span>
-              <button className='popup__submit popup__submit_disabled' type='submit' name='submit' disabled>Create</button>
-            </form>
-          </div>
-        </div>
+        
         <div className='popup' id='photo'>
           <div className='popup__image-wrap'>
             <button className='popup__close popup__close_type_image' type='button'></button>
