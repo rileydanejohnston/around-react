@@ -1,3 +1,4 @@
+import React from 'react'
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -5,25 +6,47 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
 function App() {
+
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
+
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
+
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+
   return (
     <div className='root'>
       <div className='page'>
         <Header />
-        <Main />
+        <Main 
+          onEditProfileClick={handleEditProfileClick} 
+          onAddPlaceClick={handleAddPlaceClick} 
+          onEditAvatarClick={handleEditAvatarClick} 
+          //onCardClick={}
+        />
         <Footer />
         <ImagePopup />
         <PopupWithForm title='Are you sure?' name='confirm'/>
-        <PopupWithForm title='Change profile picture' name='avatar'>
+        <PopupWithForm title='Change profile picture' name='avatar' isOpen={isEditAvatarPopupOpen}>
           <input className='popup__about popup__about_profile-pic popup__input' id='profile-pic-url' type='url' placeholder='Image link' name='pic' required />
           <span className='popup__error' id='profile-pic-url-error'></span>
         </PopupWithForm>
-        <PopupWithForm title='Edit profile' name='profile'>
+        <PopupWithForm title='Edit profile' name='profile' isOpen={isEditProfilePopupOpen}>
           <input className='popup__name popup__input' id='profile-name' type='text' placeholder='Name' name='name' minlength='2' maxlength='40' required />
           <span className='popup__error' id='profile-name-error'></span>
           <input className='popup__about popup__input' id='profile-about' type='text' placeholder='About' name='about' minlength='2' maxlength='200' required />
           <span className='popup__error' id='profile-about-error'></span>
         </PopupWithForm>
-        <PopupWithForm title='New place' name='place'>
+        <PopupWithForm title='New place' name='place' isOpen={isAddPlacePopupOpen}>
           <input className='popup__name popup__input' id='newPlace-name' type='text' placeholder='Title' name='title' minlength='1' maxlength='30' required />
           <span className='popup__error' id='newPlace-name-error'></span>
           <input className='popup__about popup__input' id='newPlace-about' type='url' placeholder='Image link' name='link' required />
@@ -38,8 +61,6 @@ function App() {
             </form>
           </div>
         </div>
-        
-        
         <template id='cardTemplate'>
           <li className='cards__item'>
             <img className='cards__photo' src='City' alt='City' />

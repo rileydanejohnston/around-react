@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function PopupWithForm(props) {
   return (
-    <div className={`popup popup_type_${props.name}`}>
+    <div className={props.isOpen ? `popup popup_active popup_type_${props.name}`: `popup popup_type_${props.name}`}>
       <div className='popup__container'>
         <button className='popup__close' type='button'></button>
         <form className='popup__form' id={props.name} method='POST' name={props.name}>
