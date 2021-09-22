@@ -23,6 +23,12 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+  }
+
   return (
     <div className='root'>
       <div className='page'>
@@ -30,23 +36,23 @@ function App() {
         <Main 
           onEditProfileClick={handleEditProfileClick} 
           onAddPlaceClick={handleAddPlaceClick} 
-          onEditAvatarClick={handleEditAvatarClick} 
+          onEditAvatarClick={handleEditAvatarClick}
           //onCardClick={}
         />
         <Footer />
         <ImagePopup />
         <PopupWithForm title='Are you sure?' name='confirm'/>
-        <PopupWithForm title='Change profile picture' name='avatar' isOpen={isEditAvatarPopupOpen}>
+        <PopupWithForm title='Change profile picture' name='avatar' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
           <input className='popup__about popup__about_profile-pic popup__input' id='profile-pic-url' type='url' placeholder='Image link' name='pic' required />
           <span className='popup__error' id='profile-pic-url-error'></span>
         </PopupWithForm>
-        <PopupWithForm title='Edit profile' name='profile' isOpen={isEditProfilePopupOpen}>
+        <PopupWithForm title='Edit profile' name='profile' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
           <input className='popup__name popup__input' id='profile-name' type='text' placeholder='Name' name='name' minlength='2' maxlength='40' required />
           <span className='popup__error' id='profile-name-error'></span>
           <input className='popup__about popup__input' id='profile-about' type='text' placeholder='About' name='about' minlength='2' maxlength='200' required />
           <span className='popup__error' id='profile-about-error'></span>
         </PopupWithForm>
-        <PopupWithForm title='New place' name='place' isOpen={isAddPlacePopupOpen}>
+        <PopupWithForm title='New place' name='place' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
           <input className='popup__name popup__input' id='newPlace-name' type='text' placeholder='Title' name='title' minlength='1' maxlength='30' required />
           <span className='popup__error' id='newPlace-name-error'></span>
           <input className='popup__about popup__input' id='newPlace-about' type='url' placeholder='Image link' name='link' required />
