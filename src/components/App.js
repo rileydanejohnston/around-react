@@ -2,6 +2,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Header />
         <Main />
         <Footer />
+        <ImagePopup />
         <PopupWithForm title='Are you sure?' name='confirm'/>
         <PopupWithForm title='Change profile picture' name='avatar'>
           <input className='popup__about popup__about_profile-pic popup__input' id='profile-pic-url' type='url' placeholder='Image link' name='pic' required />
@@ -37,13 +39,7 @@ function App() {
           </div>
         </div>
         
-        <div className='popup' id='photo'>
-          <div className='popup__image-wrap'>
-            <button className='popup__close popup__close_type_image' type='button'></button>
-            <img className='popup__image' src='City' alt='City' />
-            <p className='popup__caption'></p>
-          </div>
-        </div>
+        
         <template id='cardTemplate'>
           <li className='cards__item'>
             <img className='cards__photo' src='City' alt='City' />
