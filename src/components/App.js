@@ -47,13 +47,13 @@ function App() {
           <span className='popup__error' id='profile-pic-url-error'></span>
         </PopupWithForm>
         <PopupWithForm title='Edit profile' name='profile' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-          <input className='popup__name popup__input' id='profile-name' type='text' placeholder='Name' name='name' minlength='2' maxlength='40' required />
+          <input className='popup__name popup__input' id='profile-name' type='text' placeholder='Name' name='name' minLength='2' maxLength='40' required />
           <span className='popup__error' id='profile-name-error'></span>
-          <input className='popup__about popup__input' id='profile-about' type='text' placeholder='About' name='about' minlength='2' maxlength='200' required />
+          <input className='popup__about popup__input' id='profile-about' type='text' placeholder='About' name='about' minLength='2' maxLength='200' required />
           <span className='popup__error' id='profile-about-error'></span>
         </PopupWithForm>
         <PopupWithForm title='New place' name='place' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
-          <input className='popup__name popup__input' id='newPlace-name' type='text' placeholder='Title' name='title' minlength='1' maxlength='30' required />
+          <input className='popup__name popup__input' id='newPlace-name' type='text' placeholder='Title' name='title' minLength='1' maxLength='30' required />
           <span className='popup__error' id='newPlace-name-error'></span>
           <input className='popup__about popup__input' id='newPlace-about' type='url' placeholder='Image link' name='link' required />
           <span className='popup__error' id='newPlace-about-error'></span>

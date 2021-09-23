@@ -6,6 +6,7 @@ export default function Main(props) {
   const [userName, setUserName] = React.useState('Jacques Cousteau');
   const [userDescription, setUserDescription] = React.useState('Explorer');
   const [userAvatar, setUserAvatar] = React.useState('../images/jacques.png');
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api.getUserInfo()
@@ -19,7 +20,36 @@ export default function Main(props) {
     return () => {
       console.log('User name, about and avatar finished mounting.');
     }
-  }, [])
+  }, []);
+ 
+  React.useEffect(() => {
+    api.getCards()
+    .then((res) => 
+    {
+      const cardData = res.map((item) => {
+        return (
+        <li key={item.id} className='cards__item'>
+          <button className='cards__close-button' type='button'></button>
+          <img className='cards__photo' src={item.link} alt={item.name} />
+          <div className='cards__label'>
+            <h2 className='cards__name'>{item.name}</h2>
+            <div className='cards__like'>
+              <button className='cards__like-button' type='button'></button>
+              <p className='cards__like-count'>{item.likes.length}</p>
+            </div>
+          </div>
+        </li> 
+        )
+      });
+
+      setCards(cardData);
+    })
+    .catch((err) => console.log(err));
+    return () => {
+      console.log('Cards finished mounting.');
+    }
+  }, []);
+  
 
   return (
     <main className='main'>
@@ -39,8 +69,7 @@ export default function Main(props) {
         </div>
       </section>
       <section className='locations'>
-        <ul className='cards'>
-        </ul>
+        <ul className='cards'>{cards}</ul>
       </section>
     </main>
   )
