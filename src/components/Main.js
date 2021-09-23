@@ -1,5 +1,6 @@
 import React from 'react'
 import api from '../utils/api';
+import Card from './Card'
 
 export default function Main(props) {
 
@@ -27,19 +28,7 @@ export default function Main(props) {
     .then((res) => 
     {
       const cardData = res.map((item) => {
-        return (
-        <li key={item.id} className='cards__item'>
-          <button className='cards__close-button' type='button'></button>
-          <img className='cards__photo' src={item.link} alt={item.name} />
-          <div className='cards__label'>
-            <h2 className='cards__name'>{item.name}</h2>
-            <div className='cards__like'>
-              <button className='cards__like-button' type='button'></button>
-              <p className='cards__like-count'>{item.likes.length}</p>
-            </div>
-          </div>
-        </li> 
-        )
+        return <Card card={item} />
       });
 
       setCards(cardData);
@@ -69,7 +58,9 @@ export default function Main(props) {
         </div>
       </section>
       <section className='locations'>
-        <ul className='cards'>{cards}</ul>
+        <ul className='cards'>
+          {cards}
+        </ul>
       </section>
     </main>
   )
