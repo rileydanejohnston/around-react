@@ -28,7 +28,7 @@ export default function Main(props) {
     .then((res) => 
     {
       const cardData = res.map((item) => {
-        return <Card card={item} />
+        return <Card card={item} onCardClick={props.onCardClick}/>
       });
 
       setCards(cardData);
