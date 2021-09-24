@@ -5,7 +5,7 @@ export default function PopupWithForm(props) {
   // add hook for if user presses esc while popup is open?
 
   return (
-    <div className={props.isOpen ? `popup popup_active popup_type_${props.name}`: `popup popup_type_${props.name}`} onClick={props.onClose}>
+    <div className={props.isOpen ? `popup popup_active popup_type_${props.name}`: `popup popup_type_${props.name}`}>
       <div className='popup__container'>
         <button className='popup__close' type='button' onClick={props.onClose}></button>
         <form className='popup__form' id={props.name} method='POST' name={props.name}>

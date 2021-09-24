@@ -73,21 +73,6 @@ function App() {
             </form>
           </div>
         </div>
-        <template id='cardTemplate'>
-          <li className='cards__item'>
-            <img className='cards__photo' src='City' alt='City' />
-            <div className='cards__label'>
-              <h2 className='cards__name'></h2>
-              <div className='cards__like'>
-                <button className='cards__like-button' type='button'></button>
-                <p className='cards__like-count'></p>
-              </div>
-            </div>
-          </li>
-        </template>
-        <template id='binTemplate'>
-          <button className='cards__close-button' type='button'></button>
-        </template>
       </div>
     </div>
   );
