@@ -28,7 +28,7 @@ export default function Main(props) {
     .then((res) => 
     {
       const cardData = res.map((item) => {
-        return <Card card={item} onCardClick={props.onCardClick}/>
+        return <Card card={item} onCardClick={props.onCardClick} />
       });
 
       setCards(cardData);
@@ -44,17 +44,17 @@ export default function Main(props) {
     <main className='main'>
       <section className='profile'>
         <div className='profile__avatar' onClick={props.onEditAvatarClick} style={{ backgroundImage: `url(${userAvatar})` }}>
-          <button className='profile__avatar-btn' type='button'></button>
+          <button className='profile__avatar-btn' type='button' />
         </div>
         <div className='profile__info-container'>
           <div className='profile__info'>
             <div className='profile__name-button'>
               <h1 className='profile__name'>{userName}</h1>
-              <button className='profile__edit-button' type='button' onClick={props.onEditProfileClick}></button>
+              <button className='profile__edit-button' type='button' onClick={props.onEditProfileClick} />
             </div>
             <p className='profile__about'>{userDescription}</p>
           </div>
-          <button className='profile__add-button' type='button' onClick={props.onAddPlaceClick}></button>
+          <button className='profile__add-button' type='button' onClick={props.onAddPlaceClick} />
         </div>
       </section>
       <section className='locations'>
