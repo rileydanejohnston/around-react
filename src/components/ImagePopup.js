@@ -1,12 +1,12 @@
 import React from 'react'
 
-export default function ImagePopup(props) {
+export default function ImagePopup({ card, onClose }) {
   return (
-    <div className={props.card.isOpen ? 'popup popup_active' : 'popup'} onClick={props.onClose}>
+    <div className={card.isOpen ? 'popup popup_active' : 'popup'}>
       <div className='popup__image-wrap'>
-        <button className='popup__close popup__close_type_image' type='button' onClick={props.onClose} />
-        <img className='popup__image' src={props.card.link} alt={props.card.name} />
-        <p className='popup__caption'>{props.card.name}</p>
+        <button className='popup__close popup__close_type_image' type='button' onClick={onClose} />
+        <img className='popup__image' src={card.link} alt={card.name} />
+        <p className='popup__caption'>{card.name}</p>
       </div>
     </div>
   )
