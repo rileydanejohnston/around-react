@@ -7,7 +7,7 @@ export default function Card({ card, onCardClick}) {
   }
   
   return (
-    <li key={card.id} className='cards__item'>
+    <li key={card._id} className='cards__item'>
         <button className='cards__close-button' type='button' />
         <img className='cards__photo' src={card.link} alt={card.name} onClick={handleClick} />
         <div className='cards__label'>

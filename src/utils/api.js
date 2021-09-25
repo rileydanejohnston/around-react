@@ -1,7 +1,6 @@
 class Api {
   constructor(settings) {
     this._baseUrl = settings.baseUrl;
-    this._auth = settings.headers.authorization;
     this._headers = settings.headers;
   }
 
@@ -14,9 +13,7 @@ class Api {
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: {
-        authorization: this._auth
-      }
+      headers: this._headers
     })
       .then((res) => {
         return this._handleResponse(res);
@@ -25,9 +22,7 @@ class Api {
 
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: {
-        authorization: this._auth
-      }
+      headers: this._headers
     })
       .then((res) => {
         return this._handleResponse(res);
@@ -37,10 +32,7 @@ class Api {
   updateProfile({ name, about }) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: this._auth,
-        "Content-Type": "application/json"
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name,
         about
@@ -54,10 +46,7 @@ class Api {
   addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: {
-        authorization: this._auth,
-        "Content-Type": "application/json"
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name,
         link
@@ -71,9 +60,7 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: this._auth
-      }
+      headers: this._headers
     })
     .then((res) => {
       return this._handleResponse(res);
@@ -83,9 +70,7 @@ class Api {
   addLike(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
-      headers: {
-        authorization: this._auth
-      }
+      headers: this._headers
     })
     .then((res) => {
       return this._handleResponse(res);
@@ -95,9 +80,7 @@ class Api {
   removeLike(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: this._auth
-      }
+      headers: this._headers
     })
     .then((res) => {
       return this._handleResponse(res);
@@ -107,10 +90,7 @@ class Api {
   updateProfilePic(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: this._auth,
-        "Content-Type" : "application/json"
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar
       })
