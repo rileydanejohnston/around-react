@@ -23,7 +23,7 @@ export default function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatar
       <section className='locations'>
         <ul className='cards'>
           {cards.map((item) => {
-              return <Card card={item} onCardClick={onCardClick} />
+              return <Card key={`${item.id}`} card={item} onCardClick={onCardClick} />
           })}
         </ul>
       </section>

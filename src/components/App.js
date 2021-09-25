@@ -32,7 +32,6 @@ function App() {
       const cardData = res.map((item) => {
         return { likes: item.likes, name: item.name, link: item.link, id: item._id }
       });
-      console.log(cardData)
       setCards(cardData);
     })
     .catch((err) => console.log(err));
