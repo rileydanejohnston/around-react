@@ -4,6 +4,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import api from '../utils/api';
 
 function App() {
 
@@ -11,6 +12,33 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({ isOpen: false, link: '', name: '' });
+  const [user, setUser] = React.useState({ name: '', about: '', avatar: ''});
+  const [cards, setCards] = React.useState([]);
+
+  React.useEffect(() => {
+    api.getUserInfo()
+    .then(({ name, about, avatar }) => {
+      setUser({ name, about, avatar });
+    })
+    .catch((err) => console.log(err));
+    
+    return () => {
+    }
+  }, []);
+ 
+  React.useEffect(() => {
+    api.getCards()
+    .then((res) => {
+      const cardData = res.map((item) => {
+        return { likes: item.likes, name: item.name, link: item.link, id: item._id }
+      });
+      console.log(cardData)
+      setCards(cardData);
+    })
+    .catch((err) => console.log(err));
+    return () => {
+    }
+  }, []);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -44,6 +72,8 @@ function App() {
           onAddPlaceClick={handleAddPlaceClick} 
           onEditAvatarClick={handleEditAvatarClick}
           onCardClick={handleCardClick}
+          user={user}
+          cards={cards}
         />
         <Footer />
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
