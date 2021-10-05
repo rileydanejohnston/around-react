@@ -59,6 +59,20 @@ function App() {
     }
   }
 
+  function handleDeleteCard(card) {
+
+    api.deleteCard(card.cardId)
+    .then((res) => {
+      console.log(cards);
+      const newCards = cards.filter((prevCard) => { return prevCard.cardId !== card.cardId });
+      setCards(newCards);
+      console.log("-------------------");
+      console.log(newCards);
+    })  
+    .catch((err) => console.log(err));
+    return () => {
+    }
+  }
   
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -95,6 +109,7 @@ function App() {
             onCardClick={handleCardClick}
             cards={cards}
             onCardLike={handleCardLike}
+            onDeleteClick={handleDeleteCard}
           />
           <Footer />
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
