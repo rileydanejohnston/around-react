@@ -22,6 +22,8 @@
 @import url('./blocks/cards/cards.css');
 @import url('./blocks/cards/__item/cards__item.css');
 @import url('./blocks/cards/__close-button/cards__close-button.css');
+@import url('./blocks/cards/__close-button/_hidden/cards__close-button_hidden.css');
+@import url('./blocks/cards/__close-button/_visible/cards__close-button_visible.css');
 @import url('./blocks/cards/__photo/cards__photo.css');
 @import url('./blocks/cards/__label/cards__label.css');
 @import url('./blocks/cards/__name/cards__name.css');
