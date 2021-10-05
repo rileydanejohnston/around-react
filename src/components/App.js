@@ -40,6 +40,26 @@ function App() {
     }
   }, []);
 
+  {/* my previous reviewer instructed me to put the api calls/state variables be in the App.js file even though the instructions said Main.js. I'm continuing with that trend */} 
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(like => like._id === currentUser._id);
+
+    api.changeLikeStatus(card.cardId, !isLiked)
+    .then((res) => {
+      const newCards = cards.map((prevCard) => {
+        if (prevCard.cardId === res._id) {
+          return { likes: res.likes, name: res.name, link: res.link, cardId: res._id, ownerId: res.owner._id };
+        }
+        return prevCard;
+      });
+      setCards(newCards);
+    })  
+    .catch((err) => console.log(err));
+    return () => {
+    }
+  }
+
+  
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
@@ -74,6 +94,7 @@ function App() {
             onEditAvatarClick={handleEditAvatarClick}
             onCardClick={handleCardClick}
             cards={cards}
+            onCardLike={handleCardLike}
           />
           <Footer />
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
