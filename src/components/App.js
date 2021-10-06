@@ -7,6 +7,7 @@ import ImagePopup from './ImagePopup';
 import api from '../utils/api';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 
 function App() {
 
@@ -101,9 +102,18 @@ function App() {
   function handleUpdateUser(formInput) {
     api.updateProfile(formInput)
     .then((res) => {
-      // when i try to update ONLY the name / about, the id and avatar of the res object show as being unchanged yet the photo doesn't show up.
-        // setting all of these seems like a waste of resources.
-      setCurrentUser({ name: res.name, about: res.about, avatar: res.avatar, _id: res._id });
+      const updateUser = {...currentUser, name: res.name, about: res.about }
+      setCurrentUser(updateUser);
+      closeAllPopups();
+    })
+    .catch((err) => console.log(err));
+  }
+
+  function handleUpdateAvatar(formInput) {
+    api.updateProfilePic(formInput)
+    .then((res) => {
+      const updateUser = { ...currentUser, avatar: res.avatar };
+      setCurrentUser(updateUser);
       closeAllPopups();
     })
     .catch((err) => console.log(err));
@@ -126,10 +136,7 @@ function App() {
           <Footer />
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
           <PopupWithForm title='Are you sure?' name='confirm' />
-          <PopupWithForm title='Change profile picture' name='avatar' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-            <input className='popup__about popup__about_profile-pic popup__input' id='profile-pic-url' type='url' placeholder='Image link' name='pic' required />
-            <span className='popup__error' id='profile-pic-url-error' />
-          </PopupWithForm>
+          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
           <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
           <PopupWithForm title='New place' name='place' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
             <input className='popup__name popup__input' id='newPlace-name' type='text' placeholder='Title' name='title' minLength='1' maxLength='30' required />
