@@ -8,6 +8,7 @@ import api from '../utils/api';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 
 function App() {
 
@@ -42,7 +43,6 @@ function App() {
     }
   }, []);
 
-  {/* my previous reviewer instructed me to put the api calls/state variables be in the App.js file even though the instructions said Main.js. I'm continuing with that trend */} 
   function handleCardLike(card) {
     const isLiked = card.likes.some(like => like._id === currentUser._id);
 
@@ -65,11 +65,8 @@ function App() {
 
     api.deleteCard(card.cardId)
     .then((res) => {
-      console.log(cards);
       const newCards = cards.filter((prevCard) => { return prevCard.cardId !== card.cardId });
       setCards(newCards);
-      console.log("-------------------");
-      console.log(newCards);
     })  
     .catch((err) => console.log(err));
     return () => {
@@ -119,6 +116,23 @@ function App() {
     .catch((err) => console.log(err));
   }
 
+  function handleAddPlaceSubmit(name, url) {
+    api.addCard(name, url)
+    .then((res) => {
+      const newCard = {
+        likes: res.likes, 
+        name: res.name, 
+        link: res.link, 
+        cardId: res._id, 
+        ownerId: res.owner._id
+      };
+
+      setCards([newCard, ...cards]);
+      closeAllPopups();
+    })
+    .catch((err) => console.log(err));
+  }
+
   return (
     <div className='root'>
       <div className='page'>
@@ -138,12 +152,7 @@ function App() {
           <PopupWithForm title='Are you sure?' name='confirm' />
           <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
           <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-          <PopupWithForm title='New place' name='place' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
-            <input className='popup__name popup__input' id='newPlace-name' type='text' placeholder='Title' name='title' minLength='1' maxLength='30' required />
-            <span className='popup__error' id='newPlace-name-error' />
-            <input className='popup__about popup__input' id='newPlace-about' type='url' placeholder='Image link' name='link' required />
-            <span className='popup__error' id='newPlace-about-error' />
-          </PopupWithForm>
+          <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlaceSubmit={handleAddPlaceSubmit} />
           <div className='popup' id='confirmPopup'>
             <div className='popup__container'>
               <button className='popup__close' type='button' />
