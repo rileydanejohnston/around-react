@@ -25,9 +25,6 @@ function App() {
       setCurrentUser({ name, about, avatar, _id });
     })
     .catch((err) => console.log(err));
-    
-    return () => {
-    }
   }, []);
  
   React.useEffect(() => {
@@ -39,9 +36,20 @@ function App() {
       setCards(cardData);
     })
     .catch((err) => console.log(err));
-    return () => {
-    }
   }, []);
+
+  React.useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === 'Escape') {
+        closeAllPopups();
+      }
+    }
+
+    document.addEventListener('keydown', closeByEscape);
+
+    return () => document.removeEventListener('keydown', closeByEscape);
+
+  }, [])
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(like => like._id === currentUser._id);
@@ -57,8 +65,6 @@ function App() {
       setCards(newCards);
     })  
     .catch((err) => console.log(err));
-    return () => {
-    }
   }
 
   function handleDeleteCard(card) {
@@ -69,8 +75,6 @@ function App() {
       setCards(newCards);
     })  
     .catch((err) => console.log(err));
-    return () => {
-    }
   }
   
   function handleEditAvatarClick() {
@@ -153,15 +157,6 @@ function App() {
           <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
           <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
           <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlaceSubmit={handleAddPlaceSubmit} />
-          <div className='popup' id='confirmPopup'>
-            <div className='popup__container'>
-              <button className='popup__close' type='button' />
-              <form className='popup__form' id='confirm-form' method='POST' name='form'>
-                <h3 className='popup__title popup__title_confirm'>Are you sure?</h3>
-                <button className='popup__submit popup__submit_confirm' id='confirm-submit' type='submit' name='submit'>Yes</button>
-              </form>
-            </div>
-          </div>
         </CurrentUserContext.Provider>
       </div>
     </div>
